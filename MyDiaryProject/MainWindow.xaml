@@ -1,0 +1,76 @@
+﻿<Window x:Class="MyDiaryProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:ex="clr-namespace:Smith.WPF.HtmlEditor;assembly=Smith.WPF.HtmlEditor"
+        xmlns:local="clr-namespace:MyDiaryProject"
+        mc:Ignorable="d"
+        Title="阿吉奥传奇日记" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
+        <WrapPanel Grid.Row="1" Grid.ColumnSpan="3">
+            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top"  Width="175" Name="Picker_Time" Margin="10,0,10,0"  />
+             <Label Content="日记类型:" Width="60" />
+            <ComboBox Name="cmb_diaryType" Width="80" Loaded="cmb_Item_Loaded"/>
+            <Label Content="标题：" Margin="10,0,0,0" Width="60"/>
+             <TextBox Name="txt_Title" Width="250" Height="25" />
+            <Button Name="btn_save" Content="保存" Width="80" Margin="10,0,0,0" Height="25" Click="Functino_buttonClitk"/>
+        </WrapPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Label Content="日记列表" Height="25" Width="80" HorizontalAlignment="Left"/>
+            <ListBox Name="listB_itemList" Height="350" Width="140" ItemsSource="{Binding DiaryInfo}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel>
+                                <Label Content="{Binding itemTitle}" FontSize="12" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding writeDate}" FontSize="8" HorizontalAlignment="Right" Foreground="#FF838282" />
+                                
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+                <ListBox.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Control.Width" Value="120"/>
+                        <Setter Property="Control.Margin" Value="5"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ListBox.Template>
+
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <ex:HtmlEditor x:Name="Editor" />
+        </StackPanel>
+        
+
+    </Grid>
+</Window>
