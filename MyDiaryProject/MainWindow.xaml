@@ -30,7 +30,7 @@
         </WrapPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">
             <Label Content="日记列表" Height="25" Width="80" HorizontalAlignment="Left"/>
-            <ListBox Name="listB_itemList" Height="350" Width="140" ItemsSource="{Binding DiaryInfo}">
+            <ListBox Name="listB_itemList" Height="350" Width="140" ItemsSource="{Binding DiaryInfo}" SelectionChanged="listB_itemList_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -58,7 +58,7 @@
 
                 <ListBox.Template>
                     <ControlTemplate>
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                             <ItemsPresenter/>
                         </ScrollViewer>
                     </ControlTemplate>

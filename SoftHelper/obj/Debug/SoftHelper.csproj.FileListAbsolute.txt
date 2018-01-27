@@ -1,0 +1,8 @@
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\SoftHelper\obj\Debug\SoftHelper.csprojResolveAssemblyReference.cache
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\SoftHelper\bin\Debug\SoftHelper.dll
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\SoftHelper\bin\Debug\SoftHelper.pdb
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\SoftHelper\obj\Debug\SoftHelper.dll
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\SoftHelper\obj\Debug\SoftHelper.pdb
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\SoftHelper\bin\Debug\System.Data.SQLite.dll
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\SoftHelper\bin\Debug\DiaryModel.dll
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\SoftHelper\bin\Debug\DiaryModel.pdb

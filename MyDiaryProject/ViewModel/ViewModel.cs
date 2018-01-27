@@ -28,8 +28,8 @@ namespace MyDiaryProject.ViewModel
             return _instance;
         }
 
-        private ObservableCollection<DiaryModel> diaryInfo;
-        public ObservableCollection<DiaryModel> DiaryInfo
+        private ObservableCollection<DiaryModel.DiaryModel> diaryInfo;
+        public ObservableCollection<DiaryModel.DiaryModel> DiaryInfo
         {
             get
             {

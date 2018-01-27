@@ -1,0 +1,5 @@
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\DiaryModel\bin\Debug\DiaryModel.dll
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\DiaryModel\bin\Debug\DiaryModel.pdb
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\DiaryModel\obj\Debug\DiaryModel.csprojResolveAssemblyReference.cache
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\DiaryModel\obj\Debug\DiaryModel.dll
+D:\AziouStudio\C#\AziouDiary\MyDiary\Legeng-Diary\DiaryModel\obj\Debug\DiaryModel.pdb

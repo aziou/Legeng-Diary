@@ -29,18 +29,12 @@ namespace MyDiaryProject
             listB_itemList.DataContext = ViewModel.ViewModel.CreateInstance();
         }
 
+        public string localParh = @"Data Source=" + System.Environment.CurrentDirectory + "\\database\\MyFirstDataBase.db" + ";Pooling=true;FailIfMissing=false";
         private void Load()
         {
             #region 测试
-            MyDiaryProject.Model.DiaryModel currentDiary = new Model.DiaryModel();
-            ObservableCollection<DiaryModel> DiaryCol = new ObservableCollection<DiaryModel>() {
-
-                new DiaryModel() { itemTitle="Hello World",writeDate=Convert.ToDateTime("2018/1/25")},
-                new DiaryModel() { itemTitle="船长的开发路",writeDate=Convert.ToDateTime("2018/1/24")}
-
-            };
-
-            ViewModel.ViewModel.CreateInstance().DiaryInfo= DiaryCol;
+            Picker_Time.Text = DateTime.Now.ToShortDateString();
+            RefreshLisbox();
             #endregion
         }
 
@@ -62,11 +56,94 @@ namespace MyDiaryProject
 
             switch (btn.Name)
             {
-                case "txt_save":
+                case "btn_save":
+                    DiaryModel.DiaryModel tempDiaryModel = new DiaryModel.DiaryModel();
+                    tempDiaryModel.UserName = "lee";
+                    tempDiaryModel.diaryType = cmb_diaryType.SelectedIndex;
+                    tempDiaryModel.itemTitle = txt_Title.Text.ToString();
+                    tempDiaryModel.diaryContent = Editor.ContentHtml;
+                    tempDiaryModel.writeDate =Convert.ToDateTime(Picker_Time.Text);
+
+                  Dictionary<string,string> DataList = new Dictionary<string, string>();
+                    List<string> SqlList = new List<string>();
+                    SoftHelper.SqlLiteHelper helper = new SoftHelper.SqlLiteHelper(localParh)
+;                    DataList = helper.GetDateAndIDDataList("select * from baseinfo order by WriteDownDate desc");
+                 
+                    string sql = "";
+                    if (DataList.ContainsKey(Convert.ToDateTime(Picker_Time.Text).ToString("yyyy-MM-dd")))
+                    {
+                        sql = string.Format("update  baseinfo set UserName='{0}',DiaryType={1},DiaryTitle='{2}',DiaryContext='{3}' where UserId='{4}'"
+, tempDiaryModel.UserName
+, tempDiaryModel.diaryType
+, tempDiaryModel.itemTitle
+, tempDiaryModel.diaryContent
+, DataList[Convert.ToDateTime( Picker_Time.Text).ToString("yyyy-MM-dd")]);
+                    }
+                    else
+                    {
+                         sql = string.Format("insert into baseinfo (UserName,DiaryType,DiaryTitle,WriteDownDate,DiaryContext,UserId) values('{0}',{1},'{2}','{3}','{4}','{5}')"
+                        , tempDiaryModel.UserName
+                        , tempDiaryModel.diaryType
+                        , tempDiaryModel.itemTitle
+                        , tempDiaryModel.writeDate.ToString("s")
+                        , tempDiaryModel.diaryContent.Replace("'","\"")
+                        ,Convert.ToUInt64(Convert.ToDateTime(Picker_Time.Text).ToString("yyyyMMdd")+DateTime.Now.ToString("HHmmss")).ToString());
+                    }
+                    SqlList.Add(sql);
+                    bool result= helper.InsertData(SqlList);
+
+                    if (result)
+                    {
+                        MessageBox.Show("日记保存 成功！", "Tip");
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("日记保存 失败！", "Tip");
+                    }
+                    RefreshLisbox();
                     break;
                 default:
                     break;
             }
+        }
+
+        private void RefreshLisbox()
+        {
+            try
+            {
+                ObservableCollection<DiaryModel.DiaryModel> DiaryCol = new ObservableCollection<DiaryModel.DiaryModel>()
+                {
+
+               
+
+                };
+                SoftHelper.SqlLiteHelper helper = new SoftHelper.SqlLiteHelper(localParh)
+;
+                DiaryCol = helper.GetDiaryItem();
+
+
+
+                ViewModel.ViewModel.CreateInstance().DiaryInfo = DiaryCol;
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void listB_itemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            DiaryModel.DiaryModel curItem =(DiaryModel.DiaryModel) listB_itemList.SelectedItem;
+
+            Picker_Time.Text = curItem.writeDate.ToString("yyyy-MM-dd");
+
+            cmb_diaryType.SelectedIndex = curItem.diaryType;
+
+            txt_Title.Text = curItem.itemTitle;
+
+            Editor.ContentHtml = curItem.diaryContent;
         }
     }
 }
